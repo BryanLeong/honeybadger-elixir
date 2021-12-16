@@ -25,6 +25,7 @@ defmodule Honeybadger.Logger do
   end
 
   def handle_event({:error, _gl, {Logger, message, _ts, metadata}}, state) do
+    IO.inspect(metadata)
     unless domain_ignored?(metadata[:domain], Honeybadger.get_env(:ignored_domains)) ||
              internal_error?(metadata[:application]) do
       details = extract_details(message)
